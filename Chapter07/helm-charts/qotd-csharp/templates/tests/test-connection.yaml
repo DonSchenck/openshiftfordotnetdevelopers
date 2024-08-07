@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "qotd-csharp.fullname" . }}-test-connection"
+  labels:
+    {{- include "qotd-csharp.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "qotd-csharp.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

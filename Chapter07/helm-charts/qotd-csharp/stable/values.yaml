@@ -1,0 +1,16 @@
+# Default values for netcandystore.
+
+ssh:
+  username: "administrator"
+
+qotdcsharp:
+  image: "quay.io/donschenck/qotd-csharp:openshiftfordotnetdevelopers"
+
+frontend:
+  replicas: 1
+
+backend:
+  replicas: 1
+
+route:
+  enabled: true

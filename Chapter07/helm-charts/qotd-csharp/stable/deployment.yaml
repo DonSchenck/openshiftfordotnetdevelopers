@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: qotd-csharp
+    {{- include "qotd-csharp.labels" . | nindent 4 }}
+  name: qotd-csharp
+spec:
+  selector:
+    matchLabels:
+      app: qotd-csharp
+  replicas: {{ .Values.frontend.replicas }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "qotd-csharp.selectorLabels" . | nindent 8 }}
+        app: qotd-csharp
+      name: qotd-csharp
+    spec:
+      containers:
+      - name: qotd-csharp
+        image: {{ .Values.qotdcsharp.image | quote }}
+        imagePullPolicy: Always
