@@ -12,10 +12,6 @@ spec:
   replicas: {{ .Values.frontend.replicas }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "qotd-csharp.selectorLabels" . | nindent 8 }}
         app: qotd-csharp
