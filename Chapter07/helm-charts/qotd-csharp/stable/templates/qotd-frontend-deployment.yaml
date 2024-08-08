@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: qotd-frontend
+    {{- include "qotd.labels" . | nindent 4 }}
+  name: qotd-frontend
+spec:
+  selector:
+    matchLabels:
+      app: qotd-frontend
+  replicas: {{ .Values.frontend.replicas }}
+  template:
+    metadata:
+      labels:
+        {{- include "qotd.selectorLabels" . | nindent 8 }}
+        app: qotd-frontend
+      name: qotd-frontend
+    spec:
+      containers:
+      - name: qotd-frontend
+        image: {{ .Values.qotdfrontend.image | quote }}
+        imagePullPolicy: Always

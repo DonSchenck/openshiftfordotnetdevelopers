@@ -1,14 +1,14 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: qotd-csharp
+  name: qotd-frontend
   labels:
-    {{- include "qotd-csharp.labels" . | nindent 4 }}
-    app: qotd-csharp
+    {{- include "qotd.labels" . | nindent 4 }}
+    app: qotd-frontend
 spec:
   to:
     kind: Service
-    name: qotd-csharp
+    name: qotd-frontend
     weight: 100
   port:
     targetPort: 8080

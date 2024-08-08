@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: qotd-csharp
+  name: qotd-frontend
   labels:
-    {{- include "qotd-csharp.labels" . | nindent 4 }}
-    app: qotd-csharp
+    {{- include "qotd.labels" . | nindent 4 }}
+    app: qotd-frontend
 spec:
   ports:
   - port: 8080
     targetPort: 8080
   selector:
-    app: qotd-csharp
+    app: qotd-frontend
   type: ClusterIP
